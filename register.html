@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('register') }}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required onchange="toggleSubject()">
+                <option value="student">Student</option>
+                <option value="staff">Staff</option>
+            </select><br><br>
+
+            <div id="student_fields">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name"><br><br>
+
+                <label for="roll_number">Roll Number:</label>
+                <input type="text" id="roll_number" name="roll_number"><br><br>
+
+                <label for="class_name">Class:</label>
+                <input type="text" id="class_name" name="class_name"><br><br>
+            </div>
+
+            <div id="staff_fields" style="display: none;">
+                <label for="subject">Subject:</label>
+                <select id="subject" name="subject">
+                    <option value="" disabled selected>Select Subject</option>
+                    <option value="Math">Math</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
+                    </select><br><br>
+            </div>
+
+            <input type="submit" value="Register">
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+
+    <script>
+        function toggleSubject() {
+            var role = document.getElementById("role").value;
+            var studentFields = document.getElementById("student_fields");
+            var staffFields = document.getElementById("staff_fields");
+
+            if (role === "staff") {
+                studentFields.style.display = "none";
+                staffFields.style.display = "block";
+                document.getElementById("full_name").required = false;
+                document.getElementById("roll_number").required = false;
+                document.getElementById("class_name").required = false;
+                document.getElementById("subject").required = true;
+            } else {
+                studentFields.style.display = "block";
+                staffFields.style.display = "none";
+                document.getElementById("full_name").required = true;
+                document.getElementById("roll_number").required = true;
+                document.getElementById("class_name").required = true;
+                document.getElementById("subject").required = false;
+            }
+        }
+    </script>
+</body>
+</html>

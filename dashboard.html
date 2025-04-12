@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }} ({{ role }})</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="dashboard-actions">
+            {% if role == 'student' %}
+                <a href="{{ url_for('upload_face') }}" class="button">Upload Face Data</a>
+                <a href="{{ url_for('mark_attendance') }}" class="button">Mark Attendance</a>
+                <a href="{{ url_for('view_attendance') }}" class="button">View Attendance</a>
+            {% elif role == 'staff' %}
+                <a href="{{ url_for('mark_attendance') }}" class="button">Mark Attendance</a>
+                <a href="{{ url_for('view_attendance') }}" class="button">View Attendance</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}" class="button logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
