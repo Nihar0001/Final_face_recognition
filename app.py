@@ -56,7 +56,7 @@ def allowed_file(filename):
 # Load known faces
 known_face_encodings = []
 known_face_names = []
-
+    
 def load_known_faces():
     global known_face_encodings, known_face_names
     known_face_encodings = []
