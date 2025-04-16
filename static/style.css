@@ -11,7 +11,7 @@
 /* Body styles for index page only */
 body.index-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(145Deg, #09122C  0%, #E17564 100%); 
+  /* background: linear-gradient(145Deg, #09122C  0%, #E17564 100%);  */
   color: var(--white);
   min-height: 100vh;
   overflow: hidden;
@@ -27,7 +27,8 @@ body.index-page {
 /* Default body style for other pages */
 body {
   font-family: Arial, sans-serif;
-  background: rgba(0,0,0,0.5) url(index.jpg);
+  /* background: rgba(0,0,0,0.5) url(index.jpg); */
+  background: #1F2937 ;
   background-size: cover;
   background-position: center;
   background-blend-mode: darken;
@@ -94,7 +95,7 @@ body {
   background: linear-gradient(to right, #ffffff, #d1e8ff);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: #F9FAFB;
   animation: slideIn 1s ease-in-out;
 }
 
@@ -298,6 +299,6 @@ tr:hover {
   }
   
   .index-page h1 {
-      font-size: 2rem;
-  }
-}
+      font-size:2rem;
+  }
+  
