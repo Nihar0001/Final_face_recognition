@@ -1,106 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
-<body class="register-page">
 
-    <!-- Background blobs -->
-    <div class="blob"></div>
-    <div class="blob2"></div>
+<body class="index-page">
+  <!-- Background blobs -->
+  <div class="blob"></div>
+  <div class="blob2"></div>
 
-    <!-- Register container with glass effect -->
-    <div class="glass-container">
-        <h1 id="heading">Register</h1>
+  <!-- Register container -->
+  <div class="glass-container">
+    <h1 id="heading">Register</h1>
+    <br>
 
-        <!-- Flash messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <p class="flash alert-danger">{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <p class="flash alert-danger">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 
-        <!-- Registration form -->
-        <form method="POST" action="{{ url_for('register') }}">
-            <div class="content">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" class="input-field" required><br><br>
+    <!-- Register form -->
+    <form method="POST" action="{{ url_for('register') }}">
+      <div class="content">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-input"
+          required
+        />
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="input-field" required><br><br>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-input"
+          required
+        />
 
-                <label for="role">Role:</label>
-                <select id="role" name="role" class="input-field" required onchange="toggleSubject()">
-                    <option value="student">Student</option>
-                    <option value="staff">Staff</option>
-                </select><br><br>
+        <label for="role">Role:</label>
+        <select
+          id="role"
+          name="role"
+          class="form-input"
+          onchange="toggleFields()"
+          required
+        >
+          <option value="student" selected>Student</option>
+          <option value="staff">Staff</option>
+        </select>
 
-                <!-- Student-specific fields -->
-                <div id="student_fields">
-                    <label for="full_name">Full Name:</label>
-                    <input type="text" id="full_name" name="full_name" class="input-field" required><br><br>
+        <div id="student_fields">
+          <label for="full_name">Full Name:</label>
+          <input
+            type="text"
+            id="full_name"
+            name="full_name"
+            class="form-input"
+            required
+          />
 
-                    <label for="roll_number">Roll Number:</label>
-                    <input type="text" id="roll_number" name="roll_number" class="input-field" required><br><br>
+          <label for="roll_number">Roll Number:</label>
+          <input
+            type="text"
+            id="roll_number"
+            name="roll_number"
+            class="form-input"
+            required
+          />
 
-                    <label for="class_name">Class:</label>
-                    <input type="text" id="class_name" name="class_name" class="input-field" required><br><br>
-                </div>
+          <label for="class_name">Class:</label>
+          <input
+            type="text"
+            id="class_name"
+            name="class_name"
+            class="form-input"
+            required
+          />
+        </div>
 
-                <!-- Staff-specific fields -->
-                <div id="staff_fields" style="display: none;">
-                    <label for="subject">Subject:</label>
-                    <select id="subject" name="subject" class="input-field" required>
-                        <option value="" disabled selected>Select Subject</option>
-                        <option value="Math">Math</option>
-                        <option value="Science">Science</option>
-                        <option value="English">English</option>
-                    </select><br><br>
-                </div>
+        <div id="staff_fields" style="display: none;">
+          <label for="subject">Subject:</label>
+          <select
+            id="subject"
+            name="subject"
+            class="form-input"
+          >
+            <option value="" disabled selected>Select Subject</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+          </select>
+        </div>
 
-                <!-- Submit button -->
-                <input type="submit" value="Register" class="btn btn-login">
-            </div>
-        </form>
+        <input type="submit" class="btn btn-login" value="Register" />
+      </div>
+    </form>
 
-        <!-- Link to login page -->
-        <p id="logintext">
-            Already have an account? <br>
-            <a href="{{ url_for('login') }}" class="login-link">Login</a>
-        </p>
-    </div>
+    <p id="registertxt">
+      Already have an account? <br />
+      <a href="{{ url_for('login') }}">Login here</a>
+    </p>
+  </div>
 
-    <!-- JavaScript to toggle fields based on role -->
-    <script>
-        function toggleSubject() {
-            var role = document.getElementById("role").value;
-            var studentFields = document.getElementById("student_fields");
-            var staffFields = document.getElementById("staff_fields");
+  <script>
+    function toggleFields() {
+      const role = document.getElementById("role").value;
+      const studentFields = document.getElementById("student_fields");
+      const staffFields = document.getElementById("staff_fields");
 
-            if (role === "staff") {
-                studentFields.style.display = "none";
-                staffFields.style.display = "block";
-                document.getElementById("full_name").required = false;
-                document.getElementById("roll_number").required = false;
-                document.getElementById("class_name").required = false;
-                document.getElementById("subject").required = true;
-            } else {
-                studentFields.style.display = "block";
-                staffFields.style.display = "none";
-                document.getElementById("full_name").required = true;
-                document.getElementById("roll_number").required = true;
-                document.getElementById("class_name").required = true;
-                document.getElementById("subject").required = false;
-            }
-        }
-    </script>
+      if (role === "staff") {
+        studentFields.style.display = "none";
+        staffFields.style.display = "block";
+        document.getElementById("full_name").required = false;
+        document.getElementById("roll_number").required = false;
+        document.getElementById("class_name").required = false;
+        document.getElementById("subject").required = true;
+      } else {
+        studentFields.style.display = "block";
+        staffFields.style.display = "none";
+        document.getElementById("full_name").required = true;
+        document.getElementById("roll_number").required = true;
+        document.getElementById("class_name").required = true;
+        document.getElementById("subject").required = false;
+      }
+    }
 
+    // Handle default selected role on page load
+    window.onload = toggleFields;
+  </script>
 </body>
 </html>
