@@ -1,13 +1,18 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 </head>
 <body>
+    <div class="blob"> </div>
+    <div class="blob2" > </div>
+
     <div class="container">
-        <h1>Welcome, {{ username }} ({{ role }})</h1>
+        <h1>Welcome, <span class="username">{{ username }}</span> (<span class="role">{{ role }}</span>)</h1>
+
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="flash-messages">
