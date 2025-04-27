@@ -1,61 +1,83 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <div class="container">
-        <h1>Register</h1>
+<body class="register-page">
+
+    <!-- Background blobs -->
+    <div class="blob"></div>
+    <div class="blob2"></div>
+
+    <!-- Register container with glass effect -->
+    <div class="glass-container">
+        <h1 id="heading">Register</h1>
+
+        <!-- Flash messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="flash-messages">
                     {% for message in messages %}
-                        <p class="flash">{{ message }}</p>
+                        <p class="flash alert-danger">{{ message }}</p>
                     {% endfor %}
                 </div>
             {% endif %}
         {% endwith %}
+
+        <!-- Registration form -->
         <form method="POST" action="{{ url_for('register') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br><br>
+            <div class="content">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input-field" required><br><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="input-field" required><br><br>
 
-            <label for="role">Role:</label>
-            <select id="role" name="role" required onchange="toggleSubject()">
-                <option value="student">Student</option>
-                <option value="staff">Staff</option>
-            </select><br><br>
+                <label for="role">Role:</label>
+                <select id="role" name="role" class="input-field" required onchange="toggleSubject()">
+                    <option value="student">Student</option>
+                    <option value="staff">Staff</option>
+                </select><br><br>
 
-            <div id="student_fields">
-                <label for="full_name">Full Name:</label>
-                <input type="text" id="full_name" name="full_name"><br><br>
+                <!-- Student-specific fields -->
+                <div id="student_fields">
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" id="full_name" name="full_name" class="input-field" required><br><br>
 
-                <label for="roll_number">Roll Number:</label>
-                <input type="text" id="roll_number" name="roll_number"><br><br>
+                    <label for="roll_number">Roll Number:</label>
+                    <input type="text" id="roll_number" name="roll_number" class="input-field" required><br><br>
 
-                <label for="class_name">Class:</label>
-                <input type="text" id="class_name" name="class_name"><br><br>
-            </div>
+                    <label for="class_name">Class:</label>
+                    <input type="text" id="class_name" name="class_name" class="input-field" required><br><br>
+                </div>
 
-            <div id="staff_fields" style="display: none;">
-                <label for="subject">Subject:</label>
-                <select id="subject" name="subject">
-                    <option value="" disabled selected>Select Subject</option>
-                    <option value="Math">Math</option>
-                    <option value="Science">Science</option>
-                    <option value="English">English</option>
+                <!-- Staff-specific fields -->
+                <div id="staff_fields" style="display: none;">
+                    <label for="subject">Subject:</label>
+                    <select id="subject" name="subject" class="input-field" required>
+                        <option value="" disabled selected>Select Subject</option>
+                        <option value="Math">Math</option>
+                        <option value="Science">Science</option>
+                        <option value="English">English</option>
                     </select><br><br>
-            </div>
+                </div>
 
-            <input type="submit" value="Register">
+                <!-- Submit button -->
+                <input type="submit" value="Register" class="btn btn-login">
+            </div>
         </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+
+        <!-- Link to login page -->
+        <p id="logintext">
+            Already have an account? <br>
+            <a href="{{ url_for('login') }}" class="login-link">Login</a>
+        </p>
     </div>
 
+    <!-- JavaScript to toggle fields based on role -->
     <script>
         function toggleSubject() {
             var role = document.getElementById("role").value;
@@ -79,5 +101,6 @@
             }
         }
     </script>
+
 </body>
 </html>
