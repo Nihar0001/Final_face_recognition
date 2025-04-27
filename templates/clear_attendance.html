@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clear Attendance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Clear Attendance</h1>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-        <form method="POST" action="{{ url_for('clear_attendance') }}">
-            <div class="form-group">
-                <label for="clear_date">Select Date to Clear:</label>
-                <input type="date" id="clear_date" name="clear_date" required>
-            </div>
-            <div class="form-group">
-                <label for="clear_class">Select Class to Clear:</label>
-                <select id="clear_class" name="clear_class">
-                    <option value="all">All Classes</option>
-                    {% for cls in classes %}
-                        <option value="{{ cls }}">{{ cls }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="clear_subject">Select Subject to Clear (Optional):</label>
-                <select id="clear_subject" name="clear_subject">
-                    <option value="all">All Subjects</option>
-                    {% for subject in subjects %}
-                        <option value="{{ subject }}">{{ subject }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" name="clear_button" class="btn btn-danger">Clear Attendance</button>
-            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
-        </form>
-        <hr>
-        <p><a href="{{ url_for('view_all_attendance') }}">View All Attendance Records</a></p>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='clear_attendance.css') }}"
+    />
+  </head>
+  <body class="index-page">
+    <!-- Background blobs -->
+    <div class="blob"></div>
+    <div class="blob2"></div>
+
+    <!-- Main container -->
+    <div class="glass-container">
+      <h1>Clear Attendance</h1>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <!-- Clear attendance form -->
+      <form method="POST" action="{{ url_for('clear_attendance') }}">
+        <div class="content">
+          <label for="clear_date">Select Date to Clear:</label>
+          <input type="date" id="clear_date" name="clear_date" required />
+
+          <label for="clear_class">Select Class to Clear:</label>
+          <select id="clear_class" name="clear_class">
+            <option value="all">All Classes</option>
+            {% for cls in classes %}
+            <option value="{{ cls }}">{{ cls }}</option>
+            {% endfor %}
+          </select>
+
+          <label for="clear_subject">Select Subject to Clear (Optional):</label>
+          <select id="clear_subject" name="clear_subject">
+            <option value="all">All Subjects</option>
+            {% for subject in subjects %}
+            <option value="{{ subject }}">{{ subject }}</option>
+            {% endfor %}
+          </select>
+
+          <button type="submit" name="clear_button" class="btn btn-danger">
+            Clear Attendance
+          </button>
+          <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"
+            >Back to Dashboard</a
+          >
+        </div>
+      </form>
+
+      <hr />
+      <p>
+        <a href="{{ url_for('view_all_attendance') }}"
+          >View All Attendance Records</a
+        >
+      </p>
     </div>
-</body>
+  </body>
 </html>

@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-</head>
-<body>
-    <div class="blob"> </div>
-    <div class="blob2" > </div>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='dashboard.css') }}"
+    />
+  </head>
+  <body>
+    <div class="blob"></div>
+    <div class="blob2"></div>
 
     <div class="container">
-        <h1>Welcome, <span class="username">{{ username }}</span> (<span class="role">{{ role }}</span>)</h1>
+      <h1>
+        Welcome, <span id="username">{{ username }}</span> (<span
+          id="role"
+          >{{ role }}</span>)
+      </h1>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <p class="flash">{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+        <p class="flash">{{ message }}</p>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
 
-        <div class="dashboard-actions">
-            {% if role == 'student' %}
-                <a href="{{ url_for('upload_face') }}" class="button">Upload Face Data</a>
-                <a href="{{ url_for('mark_attendance') }}" class="button">Mark Attendance</a>
-                <a href="{{ url_for('view_attendance') }}" class="button">View Attendance</a>
-            {% elif role == 'staff' %}
-                <a href="{{ url_for('mark_attendance') }}" class="button">Mark Attendance</a>
-                <a href="{{ url_for('view_attendance') }}" class="button">View Attendance</a>
-            {% endif %}
-            <a href="{{ url_for('logout') }}" class="button logout">Logout</a>
-        </div>
+      <div class="dashboard-actions">
+        {% if role == 'student' %}
+        <a href="{{ url_for('upload_face') }}" class="button"
+          >Upload Face Data</a
+        >
+        <a href="{{ url_for('mark_attendance') }}" class="button"
+          >Mark Attendance</a
+        >
+        <a href="{{ url_for('view_attendance') }}" class="button"
+          >View Attendance</a
+        >
+        {% elif role == 'staff' %}
+        <a href="{{ url_for('mark_attendance') }}" class="button"
+          >Mark Attendance</a
+        >
+        <a href="{{ url_for('view_attendance') }}" class="button"
+          >View Attendance</a
+        >
+        {% endif %}
+        <a href="{{ url_for('logout') }}" class="button logout">Logout</a>
+      </div>
     </div>
-</body>
+  </body>
 </html>
