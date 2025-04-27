@@ -1,32 +1,32 @@
 /* Base Styles */
 
 @font-face {
-    font-family: or;
-    src: url(Orange\ Squash\ Free.otf);
+  font-family: or;
+  src: url(Orange\ Squash\ Free.otf);
 }
 @font-face {
-    font-family: lt;
-    src: url(LTPerfume-2.ttf);
+  font-family: lt;
+  src: url(LTPerfume-2.ttf);
 }
 @font-face {
-    font-family: march;
-    src: url(March\ Vibes.otf);
+  font-family: march;
+  src: url(March\ Vibes.otf);
 }
 @font-face {
-    font-family: pizz;
-    src: url(YummyPizzaDemoRegular.ttf);
+  font-family: pizz;
+  src: url(YummyPizzaDemoRegular.ttf);
 }
 @font-face {
-    font-family: aq;
-    src: url(Aqua\ Wow.ttf);
+  font-family: aq;
+  src: url(Aqua\ Wow.ttf);
 }
 @font-face {
-    font-family: roboto;
-    src: url(Roboto-Bold.ttf);
+  font-family: roboto;
+  src: url(Roboto-Bold.ttf);
 }
 @font-face {
-    font-family: milk;
-    src: url(Milker.otf);
+  font-family: milk;
+  src: url(Milker.otf);
 }
 
 :root {
@@ -40,7 +40,7 @@
 
 /* Body styles for index page only */
 body.index-page {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--white);
   min-height: 100vh;
   overflow: hidden;
@@ -56,7 +56,7 @@ body.index-page {
 /* Default body style for other pages */
 body {
   font-family: Arial, sans-serif;
-  background: #1F2937;
+  background: #1f2937;
   background-size: cover;
   background-position: center;
   background-blend-mode: darken;
@@ -73,12 +73,16 @@ body {
 }
 
 /* Index page specific elements */
-.index-page .blob, 
+.index-page .blob,
 .index-page .blob2 {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: linear-gradient(180deg, rgba(241, 93, 137, 0.4) 0%, #be31444d 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(241, 93, 137, 0.4) 0%,
+    #be31444d 100%
+  );
   border-radius: 50%;
   filter: blur(30px);
   z-index: -1;
@@ -123,7 +127,7 @@ body {
   background: linear-gradient(to right, #ffffff, #d1e8ff);
   -webkit-background-clip: text;
   background-clip: text;
-  color: #F9FAFB;
+  color: #f9fafb;
   animation: slideIn 1s ease-in-out;
 }
 
@@ -221,6 +225,14 @@ button {
   animation: popIn 1.5s ease-in-out;
 }
 
+.camera-container video {
+  width: 70%;
+}
+
+#back {
+  color: #84cbf5;
+}
+
 .auth-buttons a {
   width: 400px;
   margin: 0px;
@@ -289,10 +301,11 @@ td {
   border: 1px solid #e0e0e0;
   padding: 12px;
   text-align: left;
+  color: black;
 }
 
 th {
-  background-color: #f8f9fa;
+  background-color: #b6b6b6;
   font-weight: bold;
 }
 
@@ -301,7 +314,7 @@ td {
 }
 
 tr:hover {
-  background-color: #f5f5f5;
+  background-color: #e8e8e8;
 }
 
 /* Style for text inputs */
@@ -355,7 +368,8 @@ label {
 
 /* Animations */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
   }
   25% {
@@ -370,23 +384,43 @@ label {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes glow {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }
 
 @media (max-width: 768px) {

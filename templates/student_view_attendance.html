@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Attendance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Your Attendance</h1>
-        <p>Student Name: {{ student.full_name }}</p>
-        <p>Roll Number: {{ student.roll_number }}</p>
-        <p>Class: {{ student.class_name }}</p>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+  </head>
+  <body class="index-page">
+    <!-- Background blobs -->
+    <div class="blob"></div>
+    <div class="blob2"></div>
 
-        {% if attendance %}
-            <h2>Attendance Records</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Subject</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for record in attendance %}
-                        <tr>
-                            <td>{{ record['date'] }}</td>
-                            <td>{{ record['time'] }}</td>
-                            <td>{{ record['subject'] }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No attendance records found for you.</p>
-        {% endif %}
+    <!-- Glass container -->
+    <div class="glass-container">
+      <h1 id="heading">Your Attendance</h1>
 
-        <br>
-        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+      <!-- Student Information -->
+      <p>Student Name: {{ student.full_name }}</p>
+      <p>Roll Number: {{ student.roll_number }}</p>
+      <p>Class: {{ student.class_name }}</p>
+
+      {% if attendance %}
+      <h2>Attendance Records</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Subject</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in attendance %}
+          <tr>
+            <td>{{ record['date'] }}</td>
+            <td>{{ record['time'] }}</td>
+            <td>{{ record['subject'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No attendance records found for you.</p>
+      {% endif %}
+
+      <br />
+      <br />
+      <a id="back" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
     </div>
-</body>
+  </body>
 </html>
