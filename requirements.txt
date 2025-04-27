@@ -139,3 +139,10 @@ Werkzeug==3.1.3
 
 #pip install --upgrade $(pip list --outdated --format=json | jq -r '.[].name')  {to update all the outdated libraries}
 
+# sudo apt-get update
+sudo apt-get install libgl1-mesa-glx
+or
+sudo apt-get update && sudo apt-get install -y libgl1
+
+
+
